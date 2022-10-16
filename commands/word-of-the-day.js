@@ -2,11 +2,14 @@
 
 const { SlashCommandBuilder } = require('discord.js');
 
+const messageString = "Word of the day: "
+const wordPair = ""
+
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName('word')
-        .setDescription('test'),
-	async excecute(interaction) {
-        await interaction.reply('NEW WORD');
-    }
-}
+	data: new SlashCommandBuilder()
+		.setName('word')
+		.setDescription(''),
+	async execute(interaction) {
+		return interaction.reply('Pong!');
+	},
+};

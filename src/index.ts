@@ -1,18 +1,29 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { Client, Collection, GatewayIntentBits, Interaction } from "discord.js";
-import Discord from "discord.js";
+import { Client, Interaction } from "discord.js";
+import { Commands, handleSlashCommand } from "./commands";
 import { token } from '../config.json';
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.once('ready', () => {
-	console.log('Ready!');
+
+console.log("Bot is starting...");
+
+const client = new Client({
+    intents: []
 });
 
-client.on('interactionCreate', async (interaction: Interaction) => {
-	if (!interaction.isChatInputCommand()) return;
+client.on("ready", async () => {
+	if (!client.user || !client.application) {
+		return;
+	}
 
+	await client.application.commands.set(Commands);
+
+	console.log(`${client.user.username} is online`);
+});
+
+client.on("interactionCreate", async (interaction: Interaction) => {
+	if (interaction.isCommand()) {
+		await handleSlashCommand(client, interaction);
+	}
 });
 
 client.login(token);

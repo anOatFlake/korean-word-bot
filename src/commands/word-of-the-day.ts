@@ -1,10 +1,10 @@
 // https://github.com/kelektiv/node-cron#readme
 
 import { Client, CommandInteraction } from 'discord.js';
-import { WordPair } from 'src/models/wordPair';
+import { WordPair } from '../models/wordPair';
 import { Command } from '../models/command';
-import { getAllLines } from 'src/util/fileUtil';
-import { isToday, stringToDate } from 'src/util/dateUtil';
+import { getAllLines } from '../util/fileUtil';
+import { isToday, stringToDate } from '../util/dateUtil';
 
 const fileName = 'korean-words-with-dates.csv';
 

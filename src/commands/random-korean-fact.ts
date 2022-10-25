@@ -1,7 +1,7 @@
 import { CommandInteraction, Client } from 'discord.js';
 import { Command } from '../models/command';
-import { getAllLines } from 'src/util/fileUtil';
-import { randNum } from 'src/util/randomUtil';
+import { getAllLines } from '../util/fileUtil';
+import { randNum } from '../util/randomUtil';
 
 const fileName = 'facts.txt';
 

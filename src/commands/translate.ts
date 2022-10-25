@@ -1,7 +1,7 @@
 // https://nodejsera.com/how-to-use-google-translator-with-nodejs.html
 
 import { Client, CommandInteraction } from 'discord.js';
-import { Command } from 'src/models/command';
+import { Command } from '../models/command';
 
 export const translate: Command = {
   name: 'translate',

@@ -1,11 +1,16 @@
 import { CommandInteraction, Client } from 'discord.js';
 import { Command } from '../models/command';
+import { getAllLines } from 'src/util/fileUtil';
+import { randNum } from 'src/util/randomUtil';
+
+const fileName = 'facts.txt';
 
 export const randomKoreanFact: Command = {
   name: 'random-korean-fact',
   description: 'Returns a random korean fact',
   run: async (client: Client, interaction: CommandInteraction) => {
-    const content = 'INSERT KOREAN FACT HERE';
+    const lines = getAllLines(fileName);
+    const content = lines[randNum(lines.length)];
 
     await interaction.followUp({
       ephemeral: true,

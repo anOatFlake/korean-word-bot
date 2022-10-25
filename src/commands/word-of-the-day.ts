@@ -3,16 +3,10 @@
 import { Client, CommandInteraction } from 'discord.js';
 import { WordPair } from 'src/models/wordPair';
 import { Command } from '../models/command';
-import fs from 'fs';
-import path from 'path';
-import moment from 'moment';
+import { getAllLines } from 'src/util/fileUtil';
+import { isToday, stringToDate } from 'src/util/dateUtil';
 
-const fileName = path.join(
-  process.cwd(),
-  'src',
-  'resources',
-  'korean-words-with-dates.csv'
-);
+const fileName = 'korean-words-with-dates.csv';
 
 export const wordOfTheDay: Command = {
   name: 'word-of-the-day',
@@ -28,9 +22,14 @@ export const wordOfTheDay: Command = {
   },
 };
 
-function getCurrentWordPair(): WordPair | undefined {
-  let fileContent = fs.readFileSync(fileName, 'utf8');
-  for (const line of fileContent.split(/[\r\n]+/)) {
+/**
+ * gets the wordPair for the current date
+ * @param fileName name of the resource file
+ * @returns wordPair with todays date
+ */
+function getCurrentWordPair(fileName: string): WordPair | undefined {
+  let fileLines = getAllLines(fileName);
+  for (const line of fileLines) {
     const values = line.split(',');
     const wordPair: WordPair = {
       date: stringToDate(values[0]),
@@ -42,17 +41,4 @@ function getCurrentWordPair(): WordPair | undefined {
     }
   }
   return undefined;
-}
-
-function stringToDate(dateStr: string): Date {
-  return moment(dateStr, 'DD.MM.YYYY').toDate();
-}
-
-function isToday(dateValue: Date): boolean {
-  const today = new Date();
-  return (
-    dateValue.getDate() === today.getDate() &&
-    dateValue.getMonth() === today.getMonth() &&
-    dateValue.getFullYear() === today.getFullYear()
-  );
 }

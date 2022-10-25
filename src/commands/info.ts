@@ -1,0 +1,20 @@
+import { CommandInteraction, Client } from 'discord.js';
+import { Commands } from 'src/commands';
+import { Command } from '../models/command';
+import { randomKoreanFact } from './random-korean-fact';
+import { translate } from './translate';
+import { wordOfTheDay } from './word-of-the-day';
+
+export const infoAboutBot: Command = {
+  name: 'info',
+  description: 'Returns a explanation of all the commands',
+  run: async (client: Client, interaction: CommandInteraction) => {
+    let content =
+      'Der Bot hat folgende Befehle: \n\n**random-korean-fact**: Gibt dir einen zufälligen Fact über Korea aus. \n**translate**: Übersetzt dir ein deutsches Wort ins Koreanische. \n**word-of-the-day**: Gibt dir einen zufälligen Fact über Korea aus.\n';
+
+    await interaction.followUp({
+      ephemeral: true,
+      content,
+    });
+  },
+};

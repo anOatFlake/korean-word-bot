@@ -1,5 +1,5 @@
 export interface WordPair {
-    date: Date
-    korean: string
-    german: string
+  date: Date;
+  korean: string;
+  german: string;
 }

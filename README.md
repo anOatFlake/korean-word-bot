@@ -4,7 +4,8 @@ discord bot that displays a korean word each day with its german translation
   - [ ] get facts from https://kulturkorea.org/de/ueber-korea
   - [ ] send hidden message
 - korean word
-  - [ ] cron job
+  - [x] cron job
+  - [ ] send message in right channel
   - [ ] translate
   - [ ] fill later months
 - translate

@@ -1,10 +1,5 @@
 import { CommandInteraction, Client } from 'discord.js';
-import { Commands } from 'src/commands';
 import { Command } from '../models/command';
-import { randomKoreanFact } from './random-korean-fact';
-import { translate } from './translate';
-import { wordOfTheDay } from './word-of-the-day';
-
 export const infoAboutBot: Command = {
   name: 'info',
   description: 'Returns a explanation of all the commands',

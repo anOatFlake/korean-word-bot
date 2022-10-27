@@ -1,19 +1,19 @@
 import { Client, Interaction, TextChannel } from 'discord.js';
 import { Commands, handleSlashCommand } from './commands';
-import { token, channelId, timezone } from '../config.json';
+import { token, channelId, timezone,cronExpression } from '../config.json';
+import { wordOfTheDay } from './embeds/word-of-the-day';
 var CronJob = require('cron').CronJob;
 
 console.log('Bot is starting...');
 
 const client = new Client({
-  intents: [],
+  intents: ['Guilds'],
 });
 
 client.on('ready', async () => {
   if (!client.user || !client.application) {
     return;
   }
-
   await client.application.commands.set(Commands);
 
   console.log(`${client.user.username} is online`);
@@ -21,20 +21,16 @@ client.on('ready', async () => {
 
 client.once('ready', async () => {
   console.log('Try to register cron job...');
-  var job = new CronJob(
-    '0 * * * * *', //seconds, minutes, hours, day of month, months, day of week
+  new CronJob(
+    cronExpression, //seconds, minutes, hours, day of month, months, day of week
     function () {
-      console.log('You will see this message ?');
-      //TODO: channel undefined :(
       const channel = client.channels.cache.get(channelId) as TextChannel;
-      console.log(channel);
-      channel?.send('message');
+      channel?.send({ embeds: [wordOfTheDay] });
     },
     null,
     true,
     timezone
   );
-
   console.log('Registered cron job!');
 });
 

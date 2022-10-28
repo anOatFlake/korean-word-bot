@@ -13,8 +13,8 @@ export const randomKoreanFact: Command = {
     const content = lines[randNum(lines.length)];
 
     await interaction.followUp({
+      content: content,
       ephemeral: true,
-      content,
     });
   },
 };

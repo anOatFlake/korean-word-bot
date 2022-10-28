@@ -1,7 +1,6 @@
 import { EmbedBuilder } from '@discordjs/builders';
 
 export let basicTranslateEmbed = new EmbedBuilder()
-  .setColor(0x0099ff)
   .setThumbnail(
     'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Google_Translate_logo.svg/240px-Google_Translate_logo.svg.png'
   )

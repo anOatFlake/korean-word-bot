@@ -11,4 +11,4 @@ discord bot that displays a korean word each day with its german translation
 - translate
   - [x] google translate api
   - [x] send hidden message
-  - [ ] bug: embed addup
+  - [x] bug: embed addup

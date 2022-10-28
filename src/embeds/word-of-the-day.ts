@@ -24,7 +24,7 @@ export const wordOfTheDay = new EmbedBuilder()
       name: 'Deutsch:',
       value: getCurrentWordPair(fileName)!.german,
       inline: true,
-    },
+    }
   )
   .setTimestamp()
   .setFooter({

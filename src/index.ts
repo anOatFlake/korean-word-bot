@@ -1,6 +1,6 @@
 import { Client, Interaction, TextChannel } from 'discord.js';
 import { Commands, handleSlashCommand } from './commands';
-import { token, channelId, timezone,cronExpression } from '../config.json';
+import { token, channelId, timezone, cronExpression } from '../config.json';
 import { wordOfTheDay } from './embeds/word-of-the-day';
 var CronJob = require('cron').CronJob;
 

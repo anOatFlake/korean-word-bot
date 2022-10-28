@@ -1,12 +1,12 @@
 import { Command } from './models/command';
 import { infoAboutBot } from './commands/info';
-import { translate } from './commands/translate';
+import { translateCommand } from './commands/translate';
 import { Client, CommandInteraction } from 'discord.js';
 import { randomKoreanFact } from './commands/random-korean-fact';
 
 export const Commands: Command[] = [
   infoAboutBot,
-  translate,
+  translateCommand,
   randomKoreanFact,
 ];
 

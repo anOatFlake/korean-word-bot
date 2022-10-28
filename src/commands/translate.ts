@@ -1,11 +1,8 @@
-// https://nodejsera.com/how-to-use-google-translator-with-nodejs.html
-
 import {
   ApplicationCommandOption,
   ApplicationCommandOptionType,
   Client,
   CommandInteraction,
-  Options,
 } from 'discord.js';
 import { translate } from '@vitalets/google-translate-api';
 import { Command } from '../models/command';
@@ -28,7 +25,7 @@ export const translateCommand: Command = {
     const translatedInput = await translate(input, { from: 'de', to: 'ko' });
     await interaction.followUp({
       embeds: [
-        basicTranslateEmbed.spliceFields(0,2).addFields(
+        basicTranslateEmbed.spliceFields(0, 2).addFields(
           {
             name: 'Koreanisch:',
             value: translatedInput.text,

@@ -1,15 +1,12 @@
 import { Client, Interaction, TextChannel } from 'discord.js';
 import { Commands, handleSlashCommand } from './commands';
-import {
-  token,
-  channelId,
-  timezone,
-  cronExpression,
-  wordPairFileName,
-} from '../config.json';
 import { wordOfTheDay } from './embeds/word-of-the-day';
 import { getCurrentWordPair } from './util/wordPairUtil';
+import dotenv from 'dotenv';
+
 var CronJob = require('cron').CronJob;
+
+dotenv.config();
 
 console.log('Bot is starting...');
 
@@ -29,24 +26,26 @@ client.on('ready', async () => {
 client.once('ready', async () => {
   console.log('Try to register cron job...');
   new CronJob(
-    cronExpression, //seconds, minutes, hours, day of month, months, day of week
+    process.env.CRON_EXPRESSION, //seconds, minutes, hours, day of month, months, day of week
     function () {
-      const channel = client.channels.cache.get(channelId) as TextChannel;
+      const channel = client.channels.cache.get(
+        process.env.CHANNEL_ID ?? ''
+      ) as TextChannel;
       channel?.send({
         embeds: [
           wordOfTheDay.spliceFields(0, 2).addFields(
             {
               name: 'Koreanisch:',
               value:
-                getCurrentWordPair(wordPairFileName)?.korean ??
-                'value not defined',
+                getCurrentWordPair(process.env.WORDPAIR_FILENAME ?? '')
+                  ?.korean ?? 'value not defined',
               inline: true,
             },
             {
               name: 'Deutsch:',
               value:
-                getCurrentWordPair(wordPairFileName)?.german ??
-                'value not defined',
+                getCurrentWordPair(process.env.WORDPAIR_FILENAME ?? '')
+                  ?.german ?? 'value not defined',
               inline: true,
             }
           ),
@@ -55,7 +54,7 @@ client.once('ready', async () => {
     },
     null,
     true,
-    timezone
+    process.env.TIMEZONE
   );
   console.log('Registered cron job!');
 });
@@ -66,4 +65,4 @@ client.on('interactionCreate', async (interaction: Interaction) => {
   }
 });
 
-client.login(token);
+client.login(process.env.TOKEN);

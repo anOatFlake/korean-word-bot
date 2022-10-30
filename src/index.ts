@@ -3,8 +3,7 @@ import { Commands, handleSlashCommand } from './commands';
 import { wordOfTheDay } from './embeds/word-of-the-day';
 import { getCurrentWordPair } from './util/wordPairUtil';
 import dotenv from 'dotenv';
-
-var CronJob = require('cron').CronJob;
+import cron from 'cron';
 
 dotenv.config();
 
@@ -25,8 +24,8 @@ client.on('ready', async () => {
 
 client.once('ready', async () => {
   console.log('Try to register cron job...');
-  new CronJob(
-    process.env.CRON_EXPRESSION, //seconds, minutes, hours, day of month, months, day of week
+  new cron.CronJob(
+    process.env.CRON_EXPRESSION ?? '', //seconds, minutes, hours, day of month, months, day of week
     function () {
       const channel = client.channels.cache.get(
         process.env.CHANNEL_ID ?? ''

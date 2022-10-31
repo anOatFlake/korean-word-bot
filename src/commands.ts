@@ -3,6 +3,7 @@ import { infoAboutBot } from './commands/info';
 import { translateCommand } from './commands/translate';
 import { Client, CommandInteraction } from 'discord.js';
 import { randomKoreanFact } from './commands/random-korean-fact';
+import { getTokenSourceMapRange } from 'typescript';
 
 export const Commands: Command[] = [
   infoAboutBot,
@@ -16,11 +17,10 @@ export const handleSlashCommand = async (
 ): Promise<void> => {
   const slashCommand = Commands.find((c) => c.name === interaction.commandName);
   if (!slashCommand) {
-    interaction.followUp({ content: 'An error has occurred' });
+    interaction.followUp({ content: 'An error has occurred', ephemeral: true });
     return;
   }
 
-  await interaction.deferReply();
-
+  await interaction.deferReply({ ephemeral: true });
   slashCommand.run(client, interaction);
 };
